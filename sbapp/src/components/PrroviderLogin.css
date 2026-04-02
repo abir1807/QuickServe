@@ -1,0 +1,363 @@
+/* =========================================
+   QUICKSERVE — PROVIDER LOGIN
+   OBSIDIAN PRESTIGE EDITION
+   Cormorant Garamond + Outfit
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+:root {
+  --ember:        #e9a23b;
+  --ember-dim:    rgba(233,162,59,0.12);
+  --ember-glow:   rgba(233,162,59,0.32);
+  --ember-line:   rgba(233,162,59,0.38);
+  --obsidian:     #05050a;
+  --s1:           #0a0a10;
+  --s2:           #0f0f17;
+  --s3:           #15151e;
+  --s4:           #1c1c27;
+  --ice:          #edf0fa;
+  --mist:         rgba(237,240,250,0.5);
+  --mist-2:       rgba(237,240,250,0.2);
+  --border:       rgba(237,240,250,0.07);
+  --border-gold:  rgba(233,162,59,0.25);
+  --ff-display:   'Cormorant Garamond', serif;
+  --ff-body:      'Outfit', sans-serif;
+  --ease:         cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Page ── */
+.pl-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--obsidian);
+  font-family: var(--ff-body);
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Radial ambient */
+.pl-container::before {
+  content: '';
+  position: fixed;
+  top: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 700px;
+  background: radial-gradient(ellipse, rgba(233,162,59,0.055) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Grain */
+.pl-container::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Custom Cursor ── */
+.pl-cursor {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ember);
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  box-shadow: 0 0 20px var(--ember-glow);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+/* ── Card ── */
+.pl-card {
+  position: relative;
+  z-index: 1;
+  width: 420px;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 52px 48px 44px;
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(233,162,59,0.05),
+    0 40px 100px rgba(0,0,0,0.6),
+    0 0 80px rgba(233,162,59,0.03);
+  overflow: hidden;
+}
+
+/* Card top glow */
+.pl-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 200px;
+  background: radial-gradient(ellipse, rgba(233,162,59,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Avatar ── */
+.pl-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: var(--s3);
+  border: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  position: relative;
+  box-shadow:
+    0 0 0 6px rgba(233,162,59,0.05),
+    0 0 30px rgba(233,162,59,0.12);
+}
+
+/* Pulsing ring */
+.pl-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(233,162,59,0.2);
+  animation: plPulseRing 2.5s ease-in-out infinite;
+}
+
+@keyframes plPulseRing {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%       { transform: scale(1.1); opacity: 0; }
+}
+
+/* ── Eyebrow ── */
+.pl-eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--ember);
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pl-eyebrow::before,
+.pl-eyebrow::after {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--ember-line);
+}
+
+/* ── Title ── */
+.pl-title {
+  font-family: var(--ff-display);
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: var(--ice);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.pl-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ember);
+}
+
+.pl-subtitle {
+  font-size: 13.5px;
+  color: var(--mist);
+  font-weight: 300;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* ── Inputs ── */
+.pl-input-wrap {
+  position: relative;
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.pl-input-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mist-2);
+  font-weight: 500;
+  margin-bottom: 7px;
+  margin-left: 4px;
+}
+
+.pl-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--s3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--ice);
+  font-family: var(--ff-body);
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.35s, background 0.35s, box-shadow 0.35s;
+  cursor: none;
+}
+
+.pl-input::placeholder { color: rgba(237,240,250,0.25); }
+
+.pl-input:focus {
+  border-color: var(--border-gold);
+  background: var(--s4);
+  box-shadow: 0 0 0 3px rgba(233,162,59,0.08), 0 0 20px rgba(233,162,59,0.05);
+}
+
+/* ── Sign In Button ── */
+.pl-btn-primary {
+  width: 100%;
+  padding: 15px;
+  margin-top: 8px;
+  border: 1px solid var(--ember-line);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ember);
+  font-family: var(--ff-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+
+.pl-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ember);
+  transform: translateY(101%);
+  transition: transform 0.45s var(--ease);
+  z-index: 0;
+}
+
+.pl-btn-primary span { position: relative; z-index: 1; }
+
+.pl-btn-primary:hover {
+  color: #05050a;
+  border-color: var(--ember);
+  box-shadow: 0 12px 36px var(--ember-glow);
+}
+
+.pl-btn-primary:hover::before { transform: translateY(0); }
+
+/* ── Divider ── */
+.pl-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0 20px;
+}
+
+.pl-divider::before,
+.pl-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.pl-divider span {
+  font-size: 11px;
+  color: var(--mist-2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── Social Buttons ── */
+.pl-social-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.pl-social-btn {
+  width: 60px;
+  height: 48px;
+  background: var(--s3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: border-color 0.35s, background 0.35s, transform 0.35s var(--ease), box-shadow 0.35s;
+}
+
+.pl-social-btn:hover {
+  border-color: var(--border-gold);
+  background: var(--ember-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.pl-social-icon { width: 18px; height: 18px; }
+
+/* ── Signup row ── */
+.pl-signup-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.pl-signup-text {
+  font-size: 13px;
+  color: var(--mist-2);
+  font-weight: 300;
+}
+
+.pl-signup-btn {
+  background: transparent;
+  border: none;
+  color: var(--ember);
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: none;
+  padding: 0;
+  letter-spacing: 0.2px;
+  position: relative;
+  transition: opacity 0.3s;
+}
+
+.pl-signup-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--ember);
+  transition: width 0.35s var(--ease);
+}
+
+.pl-signup-btn:hover::after { width: 100%; }

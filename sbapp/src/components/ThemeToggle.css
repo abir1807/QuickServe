@@ -1,0 +1,100 @@
+/* =========================================
+   QUICKSERVE — FLOATING THEME TOGGLE
+   ========================================= */
+
+.tt-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 89999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--tt-bg, rgba(15,15,23,0.92));
+  border: 1px solid var(--tt-border, rgba(237,240,250,0.12));
+  border-radius: 100px;
+  padding: 10px 18px 10px 10px;
+  cursor: pointer;
+  font-family: 'Outfit', 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--tt-text, rgba(237,240,250,0.7));
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(233,162,59,0.06);
+  transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
+}
+
+.tt-btn:hover {
+  border-color: rgba(233,162,59,0.35);
+  color: #e9a23b;
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(233,162,59,0.15),
+    0 0 24px rgba(233,162,59,0.08);
+}
+
+/* Track */
+.tt-track {
+  width: 36px;
+  height: 22px;
+  background: var(--tt-track, rgba(237,240,250,0.08));
+  border-radius: 100px;
+  border: 1px solid var(--tt-track-border, rgba(237,240,250,0.1));
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: background 0.4s, border-color 0.4s;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tt-btn:hover .tt-track {
+  background: rgba(233,162,59,0.12);
+  border-color: rgba(233,162,59,0.3);
+}
+
+/* Thumb */
+.tt-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e9a23b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 2px 8px rgba(233,162,59,0.4);
+  flex-shrink: 0;
+}
+
+/* Thumb slides right in light mode */
+[data-theme="light"] .tt-thumb {
+  transform: translateX(14px);
+}
+
+/* ── Light mode overrides for the toggle itself ── */
+[data-theme="light"] .tt-btn {
+  --tt-bg:           rgba(250,247,242,0.95);
+  --tt-border:       rgba(60,40,10,0.12);
+  --tt-text:         rgba(40,30,10,0.65);
+  --tt-track:        rgba(60,40,10,0.08);
+  --tt-track-border: rgba(60,40,10,0.12);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.1),
+    0 0 0 1px rgba(233,162,59,0.1);
+}
+
+[data-theme="light"] .tt-btn:hover {
+  border-color: rgba(233,162,59,0.5);
+  color: #b5770a;
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.12),
+    0 0 0 1px rgba(233,162,59,0.2);
+}

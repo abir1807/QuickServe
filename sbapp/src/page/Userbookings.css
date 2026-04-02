@@ -1,0 +1,828 @@
+/* =========================================
+   QUICKSERVE — USER BOOKINGS
+   PRESTIGE FULL-FEATURE EDITION
+   Playfair Display + Outfit
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+:root {
+  --ember:         #e9a23b;
+  --ember-dim:     rgba(233,162,59,0.12);
+  --ember-glow:    rgba(233,162,59,0.3);
+  --ember-line:    rgba(233,162,59,0.35);
+  --obsidian:      #05050a;
+  --s1:            #0a0a10;
+  --s2:            #0f0f17;
+  --s3:            #15151e;
+  --s4:            #1c1c27;
+  --s5:            #22222f;
+  --ice:           #edf0fa;
+  --mist:          rgba(237,240,250,0.52);
+  --mist-2:        rgba(237,240,250,0.2);
+  --mist-3:        rgba(237,240,250,0.07);
+  --border:        rgba(237,240,250,0.07);
+  --border-gold:   rgba(233,162,59,0.25);
+  --pending:       #f59e0b;
+  --approved:      #34d399;
+  --completed:     #818cf8;
+  --rejected:      #f87171;
+  --ff-display:    'Playfair Display', serif;
+  --ff-body:       'Outfit', sans-serif;
+  --ease:          cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ══════════════════════════════════════════
+   PAGE
+   ══════════════════════════════════════════ */
+.ub-page {
+  min-height: 100vh;
+  background: var(--obsidian);
+  font-family: var(--ff-body);
+  color: var(--ice);
+  padding: 100px 7% 140px;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ub-page::before {
+  content: '';
+  position: fixed;
+  top: -300px; left: 50%;
+  transform: translateX(-50%);
+  width: 1200px; height: 700px;
+  background: radial-gradient(ellipse, rgba(233,162,59,0.04) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ub-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ══════════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════════ */
+.ub-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 56px;
+  animation: ubReveal 1s var(--ease) both;
+}
+
+.ub-header-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.ub-header-top::before,
+.ub-header-top::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+
+.ub-eyebrow {
+  font-family: var(--ff-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--ember);
+  white-space: nowrap;
+}
+
+.ub-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.ub-title {
+  font-family: var(--ff-display);
+  font-size: clamp(48px, 6.5vw, 84px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 0.92;
+  color: var(--ice);
+}
+
+.ub-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ember);
+}
+
+.ub-count-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding-right: 22px;
+  border-right: 2px solid var(--border-gold);
+  padding-bottom: 6px;
+}
+
+.ub-count-num {
+  font-family: var(--ff-display);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--ember);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.ub-count-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--mist-2);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════
+   FILTER TABS
+   ══════════════════════════════════════════ */
+.ub-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  animation: ubReveal 1s 0.15s var(--ease) both;
+}
+
+.ub-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--mist);
+  font-family: var(--ff-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 9px 20px;
+  border-radius: 100px;
+  letter-spacing: 0.3px;
+  transition: all 0.35s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.ub-filter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ember-dim);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ub-filter-btn:hover { color: var(--ice); border-color: var(--border-gold); }
+.ub-filter-btn:hover::before { opacity: 1; }
+
+.ub-filter-btn.active {
+  background: var(--ember-dim);
+  border-color: var(--border-gold);
+  color: var(--ember);
+}
+
+.ub-filter-count {
+  background: var(--s4);
+  border-radius: 100px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--mist-2);
+  transition: color 0.3s, background 0.3s;
+}
+
+.ub-filter-btn.active .ub-filter-count {
+  background: var(--ember-dim);
+  color: var(--ember);
+}
+
+/* ══════════════════════════════════════════
+   SKELETON LOADER
+   ══════════════════════════════════════════ */
+.ub-skeleton-card {
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 36px 44px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ub-skeleton-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(237,240,250,0.03) 50%,
+    transparent 100%);
+  animation: ubShimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes ubShimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.ub-skel-line {
+  border-radius: 8px;
+  background: var(--s4);
+  margin-bottom: 12px;
+}
+
+.ub-skel-line.lg  { height: 28px; width: 55%; }
+.ub-skel-line.md  { height: 14px; width: 35%; margin-bottom: 24px; }
+.ub-skel-line.sm  { height: 12px; width: 25%; display: inline-block; margin-right: 10px; }
+.ub-skel-line.xs  { height: 10px; width: 15%; display: inline-block; margin-right: 10px; }
+
+/* ══════════════════════════════════════════
+   SORT BAR
+   ══════════════════════════════════════════ */
+.ub-sort-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.ub-sort-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mist-2);
+  font-weight: 500;
+}
+
+.ub-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--s3);
+  border: 1px solid var(--border);
+  color: var(--mist);
+  font-family: var(--ff-body);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 7px 16px;
+  border-radius: 100px;
+  transition: all 0.3s;
+  letter-spacing: 0.3px;
+}
+
+.ub-sort-btn:hover {
+  border-color: var(--border-gold);
+  color: var(--ember);
+}
+
+/* ══════════════════════════════════════════
+   BOOKING CARD
+   ══════════════════════════════════════════ */
+.ub-card {
+  position: relative;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: ubCardIn 0.85s var(--ease) forwards;
+  animation-delay: var(--delay, 0s);
+  transition: border-color 0.45s, box-shadow 0.5s, transform 0.6s var(--ease);
+  z-index: 1;
+}
+
+.ub-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-gold);
+  box-shadow:
+    0 0 0 1px rgba(233,162,59,0.08),
+    0 40px 80px rgba(0,0,0,0.45),
+    0 0 60px rgba(233,162,59,0.04);
+}
+
+/* Status top bar */
+.ub-card-bar {
+  height: 3px;
+  width: 100%;
+}
+.ub-card-bar.pending   { background: linear-gradient(to right, transparent, var(--pending), transparent); }
+.ub-card-bar.approved  { background: linear-gradient(to right, transparent, var(--approved), transparent); }
+.ub-card-bar.completed { background: linear-gradient(to right, transparent, var(--completed), transparent); }
+.ub-card-bar.rejected  { background: linear-gradient(to right, transparent, var(--rejected), transparent); }
+
+/* Progress bar */
+.ub-progress-wrap {
+  padding: 0 44px;
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+}
+
+.ub-progress-track {
+  height: 3px;
+  background: var(--s4);
+  border-radius: 100px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.ub-progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1.2s var(--ease);
+}
+
+.ub-progress-fill.pending   { background: var(--pending);  width: 33%; }
+.ub-progress-fill.approved  { background: var(--approved); width: 66%; }
+.ub-progress-fill.completed { background: var(--completed);width: 100%; }
+.ub-progress-fill.rejected  { background: var(--rejected); width: 10%; }
+
+.ub-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0 10px;
+}
+
+.ub-progress-lbl {
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mist-2);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.ub-progress-lbl.lit-pending   { color: var(--pending); }
+.ub-progress-lbl.lit-approved  { color: var(--approved); }
+.ub-progress-lbl.lit-completed { color: var(--completed); }
+
+/* Inner grid */
+.ub-card-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  padding: 32px 44px 36px;
+  align-items: start;
+}
+
+/* ── Left: Info ── */
+.ub-card-info { display: flex; flex-direction: column; }
+
+.ub-card-index {
+  font-family: var(--ff-display);
+  font-size: 64px;
+  font-weight: 700;
+  color: rgba(233,162,59,0.055);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: -14px;
+  user-select: none;
+  transition: color 0.4s;
+}
+
+.ub-card:hover .ub-card-index { color: rgba(233,162,59,0.11); }
+
+/* Provider name row */
+.ub-provider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.ub-provider-name {
+  font-family: var(--ff-display);
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--ice);
+  letter-spacing: -0.3px;
+}
+
+/* Copy email btn */
+.ub-copy-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--mist-2);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-family: var(--ff-body);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.ub-copy-btn:hover {
+  border-color: var(--border-gold);
+  color: var(--ember);
+}
+
+.ub-copy-btn.copied {
+  border-color: var(--approved);
+  color: var(--approved);
+}
+
+.ub-name-bar {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--ember);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  transition: width 0.5s var(--ease);
+}
+
+.ub-card:hover .ub-name-bar { width: 64px; }
+
+/* Booking ID */
+.ub-booking-id {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--mist-2);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.ub-booking-id span {
+  color: var(--ember);
+  font-weight: 600;
+}
+
+/* Meta pills */
+.ub-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ub-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--s3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  color: var(--mist);
+  font-weight: 400;
+  white-space: nowrap;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.ub-card:hover .ub-meta-pill {
+  border-color: rgba(233,162,59,0.14);
+}
+
+.ub-meta-pill b {
+  color: var(--ember);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Countdown */
+.ub-countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.2);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  color: var(--approved);
+  font-weight: 500;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.ub-countdown-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--approved);
+  animation: ubPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Action buttons */
+.ub-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.ub-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1px solid rgba(248,113,113,0.25);
+  color: rgba(248,113,113,0.7);
+  font-family: var(--ff-body);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 9px 20px;
+  border-radius: 100px;
+  letter-spacing: 0.3px;
+  transition: all 0.35s var(--ease);
+}
+
+.ub-btn-cancel:hover {
+  background: rgba(248,113,113,0.1);
+  border-color: rgba(248,113,113,0.5);
+  color: var(--rejected);
+}
+
+.ub-btn-rebook {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--ember-dim);
+  border: 1px solid var(--ember-line);
+  color: var(--ember);
+  font-family: var(--ff-body);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 9px 20px;
+  border-radius: 100px;
+  letter-spacing: 0.3px;
+  transition: all 0.35s var(--ease);
+}
+
+.ub-btn-rebook:hover {
+  background: var(--ember);
+  color: #05050a;
+  box-shadow: 0 8px 24px var(--ember-glow);
+  transform: translateY(-1px);
+}
+
+/* ── Right: Status + Timeline ── */
+.ub-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+  min-width: 220px;
+}
+
+.ub-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.ub-status-badge.pending   { background: rgba(245,158,11,0.1);  border-color: rgba(245,158,11,0.3);  color: var(--pending); }
+.ub-status-badge.approved  { background: rgba(52,211,153,0.1);  border-color: rgba(52,211,153,0.3);  color: var(--approved); }
+.ub-status-badge.completed { background: rgba(129,140,248,0.1); border-color: rgba(129,140,248,0.3); color: var(--completed); }
+.ub-status-badge.rejected  { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.3); color: var(--rejected); }
+
+.ub-status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pending  .ub-status-dot { background: var(--pending);   box-shadow: 0 0 8px var(--pending);   animation: ubPulse 2s ease-in-out infinite; }
+.approved .ub-status-dot { background: var(--approved);  box-shadow: 0 0 8px var(--approved); }
+.completed .ub-status-dot{ background: var(--completed); box-shadow: 0 0 8px var(--completed); }
+.rejected .ub-status-dot { background: var(--rejected);  box-shadow: 0 0 8px var(--rejected); }
+
+/* Timeline */
+.ub-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.ub-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.ub-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 9px; top: 30px;
+  width: 2px;
+  height: calc(100% - 10px);
+  background: var(--border);
+  transition: background 0.6s;
+  z-index: 0;
+}
+
+.ub-step.done:not(:last-child)::after {
+  background: linear-gradient(to bottom, var(--approved), var(--border));
+}
+
+.ub-step-node {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--s3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s var(--ease);
+  font-size: 9px;
+  color: transparent;
+}
+
+.ub-step.done .ub-step-node {
+  background: var(--approved); border-color: var(--approved);
+  color: #05050a; box-shadow: 0 0 12px rgba(52,211,153,0.4);
+}
+
+.ub-step.active .ub-step-node {
+  background: var(--pending); border-color: var(--pending);
+  color: #05050a; box-shadow: 0 0 12px rgba(245,158,11,0.4);
+  animation: ubPulse 2s ease-in-out infinite;
+}
+
+.ub-step.rejected-step .ub-step-node {
+  background: var(--rejected); border-color: var(--rejected);
+  color: #fff; box-shadow: 0 0 12px rgba(248,113,113,0.4);
+}
+
+.ub-step-label {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--mist-2);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.ub-step.done .ub-step-label     { color: var(--approved); }
+.ub-step.active .ub-step-label   { color: var(--pending); }
+.ub-step.rejected-step .ub-step-label { color: var(--rejected); }
+
+/* ══════════════════════════════════════════
+   CONFETTI (COMPLETED)
+   ══════════════════════════════════════════ */
+.ub-confetti-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+  border-radius: 28px;
+}
+
+.ub-confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 6px; height: 10px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: ubConfettiFall 2.5s ease-in forwards;
+}
+
+@keyframes ubConfettiFall {
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(320px) rotate(720deg); }
+}
+
+/* ══════════════════════════════════════════
+   EMPTY STATE
+   ══════════════════════════════════════════ */
+.ub-empty {
+  text-align: center;
+  padding: 140px 0;
+  position: relative;
+  z-index: 1;
+  animation: ubReveal 1s var(--ease) both;
+}
+
+.ub-empty-glyph {
+  font-family: var(--ff-display);
+  font-size: 100px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(233,162,59,0.07);
+  line-height: 1;
+  margin-bottom: 24px;
+  user-select: none;
+}
+
+.ub-empty h3 {
+  font-family: var(--ff-display);
+  font-size: 38px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -1px;
+  color: var(--mist);
+  margin-bottom: 12px;
+}
+
+.ub-empty p {
+  font-size: 14px; font-weight: 300;
+  color: var(--mist-2); line-height: 1.8;
+}
+
+/* ══════════════════════════════════════════
+   FILTER EMPTY STATE
+   ══════════════════════════════════════════ */
+.ub-filter-empty {
+  text-align: center;
+  padding: 80px 0;
+  position: relative;
+  z-index: 1;
+  animation: ubReveal 0.6s var(--ease) both;
+}
+
+.ub-filter-empty p {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--mist-2);
+}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════ */
+@keyframes ubReveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ubCardIn {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ubPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(245,158,11,0.4); }
+  50%       { box-shadow: 0 0 20px rgba(245,158,11,0.7); }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .ub-card-inner { grid-template-columns: 1fr; gap: 28px; padding: 24px 28px 28px; }
+  .ub-progress-wrap { padding: 0 28px; }
+  .ub-card-right { align-items: flex-start; min-width: unset; }
+  .ub-timeline { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .ub-step::after { display: none; }
+}
+
+@media (max-width: 640px) {
+  .ub-page { padding: 80px 5% 80px; }
+  .ub-title { font-size: 48px; }
+  .ub-title-row { flex-direction: column; align-items: flex-start; }
+  .ub-count-badge {
+    align-items: flex-start;
+    border-right: none;
+    border-left: 2px solid var(--border-gold);
+    padding-right: 0; padding-left: 16px;
+  }
+}

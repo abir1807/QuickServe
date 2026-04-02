@@ -1,0 +1,18 @@
+# frontend
+sbapp/node_modules/
+sbapp/dist/
+sbapp/build/
+
+# backend
+com.edu.info/target/
+*.class
+*.log
+
+# secrets
+com.edu.info/src/main/resources/application.properties
+.env
+
+# IDE/system
+.idea/
+.vscode/
+.DS_Store

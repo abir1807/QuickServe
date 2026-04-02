@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+.dc-wrap {
+  background: #141414;
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 20px;
+  padding: 28px 28px 20px;
+  margin-top: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.dc-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+}
+
+.dc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.dc-eyebrow {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin: 0 0 6px 0;
+  font-family: 'Outfit', sans-serif;
+}
+
+.dc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+.dc-title em { color: #e2c97e; font-style: italic; }
+
+.dc-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #4a4035;
+  font-family: 'Outfit', sans-serif;
+}
+
+.dc-legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #c9a84c;
+  box-shadow: 0 0 8px rgba(201,168,76,0.4);
+}
+
+.dc-chart-wrap { position: relative; }
