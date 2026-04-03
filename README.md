@@ -293,13 +293,65 @@ Receive Bookings → Approve / Complete
 
 ---
 
-## 📸 Screenshots
 
-> Add your screenshots here
+## 📸 Project Gallery
 
-| Landing Page | Provider Dashboard | Admin Panel |
-|---|---|---|
-| ![landing]() | ![dashboard]() | ![admin]() |
+
+
+<p align="center">
+  <img src="./Screenshot (829).png" width="30%"/>
+  <img src="./Screenshot (830).png" width="30%"/>
+  <img src="./Screenshot (831).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (832).png" width="30%"/>
+  <img src="./Screenshot (833).png" width="30%"/>
+  <img src="./Screenshot (834).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (835).png" width="30%"/>
+  <img src="./Screenshot (836).png" width="30%"/>
+  <img src="./Screenshot (837).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (838).png" width="30%"/>
+  <img src="./Screenshot (839).png" width="30%"/>
+  <img src="./Screenshot (840).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (841).png" width="30%"/>
+  <img src="./Screenshot (842).png" width="30%"/>
+  <img src="./Screenshot (843).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (844).png" width="30%"/>
+  <img src="./Screenshot (845).png" width="30%"/>
+  <img src="./Screenshot (846).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (847).png" width="30%"/>
+  <img src="./Screenshot (848).png" width="30%"/>
+  <img src="./Screenshot (849).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (850).png" width="30%"/>
+  <img src="./Screenshot (851).png" width="30%"/>
+  <img src="./Screenshot (852).png" width="30%"/>
+</p>
+
+<p align="center">
+  <img src="./Screenshot (853).png" width="30%"/>
+  <img src="./Screenshot (854).png" width="30%"/>
+  <img src="./Screenshot (855).png" width="30%"/>
+</p>
+
 
 ---
 
